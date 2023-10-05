@@ -1,5 +1,14 @@
-const socket = io();
+import { loadNotes, savedNotes } from "./socket-client.js";
+import { onHandleSubmit } from "./ui.js";
 
-socket.on('notesToShow', data => {
-    console.log(data);
-});
+loadNotes();
+savedNotes();
+
+const noteForm = document.querySelector('#noteForm');
+
+// const test = document.querySelector('#description');
+// const test2 = document.getElementById('description2');
+// console.log('test: ',test.dataset);
+// console.log('test2: ',test2.dataset.hola);
+
+noteForm.addEventListener('submit', onHandleSubmit);

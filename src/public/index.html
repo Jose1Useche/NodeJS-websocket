@@ -7,8 +7,14 @@
 </head>
 <body>
     <h1>App</h1>
+
+    <form id="noteForm">
+        <input type="text" id="title">
+        <textarea name="" id="description" cols="30" rows="10" data-adios="adios" data-hola="hola"></textarea>
+        <button>Send</button>
+    </form>
 </body>
 </html>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="./main.js"></script>
+<script src="./main.js" type="module"></script> <!--type="module" importante para poder importar otros .js dentro de éste.-->
