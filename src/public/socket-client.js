@@ -18,3 +18,7 @@ export const savedNotes = () => {
         console.log('Nota guardada: ',data);
     });
 }
+
+export const newUserConeted = () => {
+    socket.on('message', data => console.log(data));
+}

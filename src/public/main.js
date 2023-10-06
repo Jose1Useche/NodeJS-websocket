@@ -1,8 +1,9 @@
-import { loadNotes, savedNotes } from "./socket-client.js";
+import { loadNotes, savedNotes, newUserConeted } from "./socket-client.js";
 import { onHandleSubmit } from "./ui.js";
 
 loadNotes();
 savedNotes();
+newUserConeted();
 
 const noteForm = document.querySelector('#noteForm');
 

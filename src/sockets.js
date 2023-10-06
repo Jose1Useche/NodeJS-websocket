@@ -1,16 +1,20 @@
 import { Note } from "./models/model.js";
 
 export default (io) => {
-    io.on('connection', async socketClient => {
-        console.log('New user connected');
-        
+    io.on('connection', async socket => {
         io.emit('notesToShow', await emitNotes());
+
+        socket.broadcast.emit('message', 'Nuevo usuario conectado!!!');
         
-        socketClient.on('newnote', async data => {
+        socket.on('newnote', async data => {
             const newNote = new Note(data); //recibe el title y el description que son justamente los campos del esquema definido.
             const savedNote = await newNote.save();
-            // socketClient.emit('savedNote', savedNote);
+            // socket.emit('savedNote', savedNote);
             io.emit('savedNote', savedNote);
+        });
+
+        socket.on('disconnect', () => {
+            io.emit('message', 'A user has left!!!');
         });
     });
 }
