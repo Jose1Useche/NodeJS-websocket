@@ -1,9 +1,10 @@
-import { loadNotes, savedNotes, newUserConeted } from "./socket-client.js";
-import { onHandleSubmit } from "./ui.js";
+import { loadNotes, savedNotes, newUserConeted, geoLocSend } from "./socket-client.js";
+import { onHandleSubmit, sendGeoLocation } from "./ui.js";
 
 loadNotes();
 savedNotes();
 newUserConeted();
+geoLocSend();
 
 const noteForm = document.querySelector('#noteForm');
 
@@ -13,3 +14,5 @@ const noteForm = document.querySelector('#noteForm');
 // console.log('test2: ',test2.dataset.hola);
 
 noteForm.addEventListener('submit', onHandleSubmit);
+
+const geoLocation = document.querySelector('#send-location').addEventListener('click', sendGeoLocation);

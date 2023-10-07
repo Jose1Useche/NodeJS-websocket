@@ -16,6 +16,12 @@ export default (io) => {
         socket.on('disconnect', () => {
             io.emit('message', 'A user has left!!!');
         });
+
+        socket.on('client:sendingGeoLoc', (data, callback) => {
+            // socket.broadcast.emit('server:sendingGeoLoc', `https://google.com/maps?q=${data.latitude},${data.longitude}`);
+            io.emit('server:sendingGeoLoc', `https://google.com/maps?q=${data.latitude},${data.longitude}`);
+            callback('mensaje de recibido del server!!!');
+        });
     });
 }
 
