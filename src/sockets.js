@@ -13,14 +13,24 @@ export default (io) => {
             io.emit('savedNote', savedNote);
         });
 
-        socket.on('disconnect', () => {
-            io.emit('message', 'A user has left!!!');
-        });
-
+        
         socket.on('client:sendingGeoLoc', (data, callback) => {
             // socket.broadcast.emit('server:sendingGeoLoc', `https://google.com/maps?q=${data.latitude},${data.longitude}`);
             io.emit('server:sendingGeoLoc', `https://google.com/maps?q=${data.latitude},${data.longitude}`);
             callback('mensaje de recibido del server!!!');
+        });
+        
+        socket.on('join', ({ userName, room }) => {
+            socket.join(room);
+            socket.broadcast.to(room).emit('message', `${userName} has joined to ${room}!!!`);
+        });
+
+        socket.on('client:messageToRoom', ({ message, room }) => {
+            io.to(room).emit('message', message);
+        });
+
+        socket.on('disconnect', () => {
+            io.emit('message', 'A user has left!!!');
         });
     });
 }

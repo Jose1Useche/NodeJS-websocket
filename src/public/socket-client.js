@@ -36,3 +36,11 @@ export const sendingGeoLocToServer = (data) => {
 
     socket.emit('client:sendingGeoLoc', geoLoc, (message) => { console.log('Geolocalización enviada.', message) });
 };
+
+export const joinRoom = (userName, room) => {
+    socket.emit('join', { userName, room });
+};
+
+export const messageToRoom = (message, room) => {
+    socket.emit('client:messageToRoom', { message, room });
+};
