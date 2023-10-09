@@ -22,7 +22,7 @@ export default (io) => {
         
         socket.on('join', ({ userName, room }) => {
             socket.join(room);
-            socket.broadcast.to(room).emit('message', `${userName} has joined to ${room}!!!`);
+            socket.broadcast.to(room).emit('message', `${userName} has joined to ${room}. His Id is ${socket.id}!!!`);
         });
 
         socket.on('client:messageToRoom', ({ message, room }) => {
